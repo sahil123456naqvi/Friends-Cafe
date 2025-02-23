@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sahil Naqvi Fast Food</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }	
+        .hero-section {
+            background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1') center/cover;
+            height: 400px;
+            position: relative;
+        }
+        .hero-overlay {
+            background: rgba(0,0,0,0.5);
+            color: white;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .menu-card {
+            transition: transform 0.3s;
+        }
+        .menu-card:hover {
+            transform: translateY(-5px);
+        }
+        footer {
+            background: #333;
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        .food-img {
+            height: 200px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Sahil Naqvi Fast Food</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#menu">Menu</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+        <div class="hero-overlay">
+            <div class="text-center">
+                <h1 class="display-4">Delicious Fast Food Delivered Fast</h1>
+                <p class="lead">Order your favorite food online and get it hot & fresh!</p>
+                <a href="#menu" class="btn btn-danger btn-lg">Order Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Our Menu</h2>
+            <div class="row g-4" id="menu-items">
+                <!-- Menu items will be dynamically loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h4>Contact Us</h4>
+                    <p>📞 987-654-3210</p>
+                    <p>📧 order@sahilnaqvi.com</p>
+                </div>
+                <div class="col-md-4">
+                    <h4>Opening Hours</h4>
+                    <p>Mon-Sun: 10 AM - 12 AM</p>
+                    <p>Delivery: 24/7</p>
+                </div>
+                <div class="col-md-4">
+                    <h4>Address</h4>
+                    <p>123 Food Street</p>
+                    <p>Fast Food City, FF 456789</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Menu data
+        const menuItems = [
+            { 
+                name: "Pepperoni Pizza", 
+                price: 12.99,
+                image: "https://images.unsplash.com/photo-1571066811602-716837d681de",
+                description: "Classic pepperoni with mozzarella cheese and tomato sauce"
+            },
+            {
+                name: "Cheese Burger",
+                price: 8.99,
+                image: "https://images.unsplash.com/photo-1550547660-d9450f859349",
+                description: "Juicy beef patty with melted cheese and fresh veggies"
+            },
+            {
+                name: "Chicken Chaumin",
+                price: 10.99,
+                image: "https://images.unsplash.com/photo-1585032226651-759b368d7246",
+                description: "Stir-fried noodles with vegetables and chicken"
+            },
+            // Add more items as needed
+        ];
+
+        // Load menu items
+        function loadMenu() {
+            const menuContainer = document.getElementById('menu-items');
+            let html = '';
+            
+            menuItems.forEach(item => {
+                html += `
+                    <div class="col-md-4 col-lg-3">
+                        <div class="card menu-card h-100">
+                            <img src="${item.image}" class="card-img-top food-img">
+                            <div class="card-body">
+                                <h5 class="card-title">${item.name}</h5>
+                                <p class="card-text">${item.description}</p>
+                                <p class="text-danger fw-bold">$${item.price}</p>
+                                <button class="btn btn-primary" onclick="orderItem('${item.name}')">Order Now</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            menuContainer.innerHTML = html;
+        }
+
+        // Order functionality
+        function orderItem(itemName) {
+            const item = menuItems.find(i => i.name === itemName);
+            if (item) {
+                const message = `Order placed for ${item.name} - $${item.price}\nWe'll contact you shortly!`;
+                alert(message);
+            }
+        }
+
+        // Initialize
+        window.onload = loadMenu;
+    </script>
+</body>
+</html>
